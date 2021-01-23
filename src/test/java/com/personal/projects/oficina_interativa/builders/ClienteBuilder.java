@@ -13,7 +13,7 @@ public class ClienteBuilder {
         builder.cliente = new Cliente();
         builder.cliente.setCpfOuCnpj("607.272.893-65");
         builder.cliente.setNome("Davi");
-        builder.cliente.setTelefone("982186943");
+        //builder.cliente.setTelefone("982186943");
         builder.cliente.setTipoCliente(TipoCliente.PESSOAFISICA);
         return builder;
     }

@@ -16,9 +16,7 @@ public class Endereco {
     private String complemento;
     @NotNull(message = "É necessário um bairro")
     private String bairro;
-    @ManyToOne
-    @JoinColumn(name="cliente_id")
-    private Cliente cliente;
+
     public Endereco() {
     }
 

@@ -12,8 +12,11 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToMany(mappedBy = "cliente")
+    @OneToMany/*(mappedBy = "cliente")*/
+    @JoinColumn(name="cliente_id")
     private Set<Endereco> enderecos = new HashSet<>();
+    @OneToMany(mappedBy = "cliente")
+    private Set<Moto> motos = new HashSet<>();
     @ElementCollection
     @CollectionTable(name="TELEFONE")
     private Set<String> telefone = new HashSet<>();
@@ -22,7 +25,7 @@ public class Cliente {
     @Size(min = 2, max = 32, message = "Nome deve ter no mínimo 2 até 32 caracteres")
     private String nome;
 
-    @NotNull
+    @NotEmpty
     private Integer tipoCliente;
 
     @NotNull(message = "É necessário um cpfOuCnpj para o cliente")
@@ -34,7 +37,7 @@ public class Cliente {
     }
 
     public Cliente(@NotEmpty(message = "É necessário um nome para o cliente") @Size(min = 2, max = 32, message = "Nome deve ter no mínimo 2 até 32 caracteres") String nome,
-                   @NotNull Integer tipoCliente,
+                   @NotEmpty Integer tipoCliente,
                    @NotNull(message = "É necessário um cpfOuCnpj para o cliente") @Size(min = 12, max = 14, message = "O tamanho do cpfOuCnpj não é válido") String cpfOuCnpj) {
         this.nome = nome;
         this.tipoCliente = tipoCliente;
@@ -45,20 +48,36 @@ public class Cliente {
         return id;
     }
 
+    public Set<Endereco> getEnderecos() {
+        return enderecos;
+    }
+
+    public void setEnderecos(Set<Endereco> enderecos) {
+        this.enderecos = enderecos;
+    }
+
+    public Set<Moto> getMotos() {
+        return motos;
+    }
+
+    public void setMotos(Set<Moto> motos) {
+        this.motos = motos;
+    }
+
+    public Set<String> getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(Set<String> telefone) {
+        this.telefone = telefone;
+    }
+
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getCpfOuCnpj() {
-        return cpfOuCnpj;
-    }
-
-    public void setCpfOuCnpj(String cpfOuCnpj) {
-        this.cpfOuCnpj = cpfOuCnpj;
     }
 
     public TipoCliente getTipoCliente() {
@@ -69,27 +88,14 @@ public class Cliente {
         this.tipoCliente = tipoCliente.getCod();
     }
 
-    public Set<Endereco> getEndereco() {
-        return enderecos;
+    public String getCpfOuCnpj() {
+        return cpfOuCnpj;
     }
 
-    public void setEndereco(Set<Endereco> endereco) {
-        this.enderecos = endereco;
-    }
-    //TELEFONE
-    public Set<String> getTelefone() {
-        return telefone;
-    }
-    public void setTelefone(String telefone) {
-        this.telefone.add(telefone);
+    public void setCpfOuCnpj(String cpfOuCnpj) {
+        this.cpfOuCnpj = cpfOuCnpj;
     }
 
-    public void addTelefone(String telefone){
-        this.telefone.add(telefone);
-    }
-    public void removeTelefone(String telefone){
-        this.telefone.remove(telefone);
-    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
