@@ -1,13 +1,11 @@
 package com.personal.projects.oficina_interativa.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Peca {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,5 +24,47 @@ public class Peca {
         this.preco = preco;
         this.marca = marca;
         this.generico = generico;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public double getPreco() {
+        return preco;
+    }
+
+    public void setPreco(double preco) {
+        this.preco = preco;
+    }
+
+    public String getMarca() {
+        return marca;
+    }
+
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
+
+    public boolean isGenerico() {
+        return generico;
+    }
+
+    public void setGenerico(boolean generico) {
+        this.generico = generico;
+    }
+
+    @Override
+    public String toString() {
+        return "Peca{" +
+                "nome='" + nome + '\'' +
+                ", preco=" + preco +
+                ", marca='" + marca + '\'' +
+                ", generico=" + generico +
+                '}';
     }
 }
