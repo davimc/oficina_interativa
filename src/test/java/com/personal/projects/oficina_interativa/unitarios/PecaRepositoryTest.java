@@ -27,8 +27,7 @@ public class PecaRepositoryTest {
     }
     @Test
     public void saveAPecaComMarcas(){
-        Set<String> marcas = new HashSet<>();
-        marcas.addAll(Arrays.asList("XR","XL","Fan 150"));
+        Set<String> marcas = new HashSet<>(Arrays.asList("XR", "XL", "Fan 150"));
         Peca peca = new PecaComMarcas("Parafuso",1.0,"Pirelli",true,marcas);
         repository.save(peca);
         System.out.println(peca+"Foi escrito");
